@@ -1,0 +1,58 @@
+[17:09:40.803] Cloning github.com/akhulisumit/AI-Leearn (Branch: main, Commit: b29e392)
+[17:09:41.592] Previous build caches not available
+[17:09:41.680] Cloning completed: 877.000ms
+[17:09:41.843] Running build in Washington, D.C., USA (East) – iad1
+[17:09:41.988] Running "vercel build"
+[17:09:42.384] Vercel CLI 41.4.1
+[17:09:42.504] WARN! Due to `builds` existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply. Learn More: https://vercel.link/unused-build-settings
+[17:09:43.025] Installing dependencies...
+[17:09:47.780] npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+[17:09:47.823] npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+[17:09:53.176] 
+[17:09:53.176] added 583 packages in 10s
+[17:09:53.176] 
+[17:09:53.176] 128 packages are looking for funding
+[17:09:53.176]   run `npm fund` for details
+[17:09:53.231] Running "npm run vercel-build"
+[17:09:53.349] 
+[17:09:53.350] > rest-express@1.0.0 vercel-build
+[17:09:53.350] > npm run build
+[17:09:53.350] 
+[17:09:53.470] 
+[17:09:53.470] > rest-express@1.0.0 build
+[17:09:53.470] > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+[17:09:53.470] 
+[17:09:53.869] [36mvite v5.4.14 [32mbuilding for production...[36m[39m
+[17:09:53.927] transforming...
+[17:09:57.901] [32m✓[39m 1897 modules transformed.
+[17:09:58.238] rendering chunks...
+[17:09:58.252] computing gzip size...
+[17:09:58.342] [2m../dist/public/[22m[32mindex.html                 [39m[1m[2m  1.60 kB[22m[1m[22m[2m │ gzip:   0.64 kB[22m
+[17:09:58.342] [2m../dist/public/[22m[2massets/[22m[35mindex-BMpTliq-.css  [39m[1m[2m 80.99 kB[22m[1m[22m[2m │ gzip:  13.19 kB[22m
+[17:09:58.342] [2m../dist/public/[22m[2massets/[22m[36mindex-q9kX_2wj.js   [39m[1m[33m508.58 kB[39m[22m[2m │ gzip: 155.07 kB[22m
+[17:09:58.342] [33m
+[17:09:58.342] (!) Some chunks are larger than 500 kB after minification. Consider:
+[17:09:58.343] - Using dynamic import() to code-split the application
+[17:09:58.343] - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+[17:09:58.343] - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[17:09:58.343] [32m✓ built in 4.45s[39m
+[17:09:58.380] 
+[17:09:58.380]   dist/index.js  40.4kb
+[17:09:58.380] 
+[17:09:58.380] ⚡ Done in 6ms
+[17:09:58.601] Using TypeScript 5.6.3 (local user-provided)
+[17:10:02.922] server/vite.ts(42,5): error TS2322: Type '{ middlewareMode: boolean; hmr: { server: Server<typeof IncomingMessage, typeof ServerResponse>; }; allowedHosts: boolean; }' is not assignable to type 'ServerOptions'.
+[17:10:02.923]   Types of property 'allowedHosts' are incompatible.
+[17:10:02.923]     Type 'boolean' is not assignable to type 'true | string[] | undefined'.
+[17:10:02.923] 
+[17:10:03.097] server/storage.ts(174,28): error TS2345: Argument of type '{ id: number; createdAt: Date; questionId: number; userAnswer: string; evaluation: Json; batchEvaluation?: Json | undefined; }' is not assignable to parameter of type '{ id: number; questionId: number; userAnswer: string; evaluation: unknown; batchEvaluation: unknown; createdAt: Date; }'.
+[17:10:03.098]   Property 'batchEvaluation' is optional in type '{ id: number; createdAt: Date; questionId: number; userAnswer: string; evaluation: Json; batchEvaluation?: Json | undefined; }' but required in type '{ id: number; questionId: number; userAnswer: string; evaluation: unknown; batchEvaluation: unknown; createdAt: Date; }'.
+[17:10:03.098] server/storage.ts(175,7): error TS2322: Type '{ id: number; createdAt: Date; questionId: number; userAnswer: string; evaluation: Json; batchEvaluation?: Json | undefined; }' is not assignable to type '{ id: number; questionId: number; userAnswer: string; evaluation: unknown; batchEvaluation: unknown; createdAt: Date; }'.
+[17:10:03.099]   Property 'batchEvaluation' is optional in type '{ id: number; createdAt: Date; questionId: number; userAnswer: string; evaluation: Json; batchEvaluation?: Json | undefined; }' but required in type '{ id: number; questionId: number; userAnswer: string; evaluation: unknown; batchEvaluation: unknown; createdAt: Date; }'.
+[17:10:03.099] 
+[17:10:18.591] Build Completed in /vercel/output [36s]
+[17:10:18.961] Deploying outputs...
+[17:10:26.564] 
+[17:10:26.847] Deployment completed
+[17:10:36.636] Uploading build cache [71.82 MB]...
+[17:10:37.624] Build cache uploaded: 989.046ms
