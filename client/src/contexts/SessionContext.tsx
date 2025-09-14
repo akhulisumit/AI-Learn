@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from "react";
+import React, { createContext, useContext, useState, useEffect, useRef, ReactNode, useCallback } from "react";
 import { Session, KnowledgeArea, Question, Answer } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 
@@ -58,7 +58,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     return newSession;
   };
   
-  const loadSession = async (sessionId: number): Promise<void> => {
+  const loadSession = useCallback(async (sessionId: number): Promise<void> => {
     // Prevent multiple concurrent loads of the same session
     if (isLoadingSession.current) {
       console.log("Session loading already in progress, skipping duplicate request");
@@ -111,7 +111,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       // Reset the loading flag when done, whether successful or not
       isLoadingSession.current = false;
     }
-  };
+  }, []);
   
   const updateSessionStage = async (stage: string): Promise<void> => {
     if (!currentSession) return;
@@ -146,7 +146,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     resetTimer();
   };
   
-  const startTimer = () => {
+  const startTimer = useCallback(() => {
     if (timerInterval) return;
     
     const interval = setInterval(() => {
@@ -154,7 +154,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     }, 1000);
     
     setTimerInterval(interval);
-  };
+  }, [timerInterval]);
   
   const pauseTimer = () => {
     if (timerInterval) {

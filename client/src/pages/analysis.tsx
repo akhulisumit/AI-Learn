@@ -50,14 +50,14 @@ const Analysis: React.FC = () => {
   const [userAnswers, setUserAnswers] = useState<Map<number, string>>(new Map());
   const [isEvaluating, setIsEvaluating] = useState(false);
   
-  // Load session data
+  // Load session data - only run when sessionId changes
   useEffect(() => {
     if (sessionId) {
       loadSession(sessionId).then(() => {
         startTimer();
       });
     }
-  }, [sessionId, loadSession, startTimer]);
+  }, [sessionId]); // Remove loadSession and startTimer from dependencies to prevent infinite loop
   
   // Define a ref to track if we've already generated questions
   const initialQuestionsGenerated = React.useRef(false);
