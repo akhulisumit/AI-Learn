@@ -13,7 +13,7 @@ import {
   QuestionWithAnswer,
   BatchEvaluationResult
 } from "@shared/schema";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Initialize Google AI with the provided API key
@@ -21,8 +21,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     console.error("GEMINI_API_KEY environment variable is not set!");
     throw new Error("GEMINI_API_KEY is required to use AI features");
   }
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-  const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
   // Health check endpoint
   app.get('/api/health', (req: Request, res: Response) => {
@@ -144,8 +143,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       Make sure every question is testing a completely different aspect of ${pureTopic}.`;
       
       try {
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
+        const result = await ai.models.generateContent({
+          model: "gemini-3-flash-preview",
+          contents: prompt
+        });
+        const response = result.response;
         const text = response.text();
         
         // Parse the response and extract questions
@@ -257,7 +259,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
             Provide a clear, accurate, and concise answer.
           `;
           
-          const result = await model.generateContent(prompt);
+          const result = await ai.models.generateContent({
+            model: "gemini-3-flash-preview",
+            contents: prompt
+          });
           const response = result.response;
           const correctAnswer = response.text().trim();
           
@@ -357,7 +362,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }`;
       
       try {
-        const result = await model.generateContent(prompt);
+        const result = await ai.models.generateContent({
+          model: "gemini-3-flash-preview",
+          contents: prompt
+        });
         const response = await result.response;
         const text = response.text();
         
@@ -470,7 +478,10 @@ IMPORTANT: DO NOT include any text outside of this JSON object.`;
           setTimeout(() => reject(new Error("AI request timed out")), 15000)
         );
         
-        const responsePromise = model.generateContent(promptText);
+        const responsePromise = ai.models.generateContent({
+          model: "gemini-3-flash-preview",
+          contents: promptText
+        });
         const result = await Promise.race([responsePromise, timeoutPromise]) as any;
         const response = await result.response;
         const text = response.text();
@@ -658,7 +669,10 @@ IMPORTANT: DO NOT include any text outside of this JSON object.`;
         setTimeout(() => reject(new Error("AI request timed out")), 15000)
       );
       
-      const responsePromise = model.generateContent(prompt);
+      const responsePromise = ai.models.generateContent({
+        model: "gemini-3-flash-preview",
+        contents: prompt
+      });
       const result = await Promise.race([responsePromise, timeoutPromise]) as any;
       const response = await result.response;
       const text = response.text();
